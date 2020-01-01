@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29613.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuyLocal", "BuyLocal.csproj", "{F148477C-9D1A-4FC0-B2DF-B48602B496F3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewModel", "..\ViewModel\ViewModel.csproj", "{69382B95-F1B3-4368-86BD-1FB409C9E787}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F148477C-9D1A-4FC0-B2DF-B48602B496F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F148477C-9D1A-4FC0-B2DF-B48602B496F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F148477C-9D1A-4FC0-B2DF-B48602B496F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F148477C-9D1A-4FC0-B2DF-B48602B496F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69382B95-F1B3-4368-86BD-1FB409C9E787}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69382B95-F1B3-4368-86BD-1FB409C9E787}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69382B95-F1B3-4368-86BD-1FB409C9E787}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69382B95-F1B3-4368-86BD-1FB409C9E787}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0916F5CC-9C15-4465-9BE5-C2624EE0D6BA}
+	EndGlobalSection
+EndGlobal
