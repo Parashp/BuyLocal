@@ -1,4 +1,5 @@
 ﻿@page
+
 @model BuyLocal.SignInModel
 @{
     Layout = null;
@@ -36,21 +37,61 @@
 </head>
 <body>
 
-    <form class="form-signin">
+    <div class="form-signin">
         <img class="mb-4 mx-auto d-block" src="~/images/logo.png" alt="" width="190" height="150">
         <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-        <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="text" id="inputEmail" class="form-control" placeholder="Username" required autofocus>        
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-        <div class="checkbox mb-3">
+
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="consumer-tab" data-toggle="tab" href="#consumer" role="tab" aria-controls="consumer" aria-selected="true">Consumer</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="farmer-tab" data-toggle="tab" href="#farmer" role="tab" aria-controls="farmer" aria-selected="false">Farmer</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="retailer-tab" data-toggle="tab" href="#retailer" role="tab" aria-controls="retailer" aria-selected="false">Retailer</a>
+            </li>
+        </ul>
+        
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="consumer" role="tabpanel" aria-labelledby="consumer-tab">
+                <form method="post" asp-action="SignInConsumer">
+                    <label for="txtUserNameC" class="sr-only">Username</label>
+                    <input type="text" id="txtUserNameC" class="form-control" placeholder="Username" required autofocus asp-for="@Model.Consumer.Username">
+                    <label for="txtPasswordC" class="sr-only">Password</label>
+                    <input type="password" id="txtPasswordC" class="form-control" placeholder="Password" required asp-for="@Model.Consumer.Password">
+                    <button class="btn btn-lg btn-primary btn-block" type="submit" asp-page-handler="SignInConsumer">Sign in</button>
+                </form>
+            </div>
+            <div class="tab-pane fade" id="farmer" role="tabpanel" aria-labelledby="farmer-tab">
+                <form method="post">
+                    <label for="txtUserNameF" class="sr-only">Username</label>
+                    <input type="text" id="txtUserNameF" class="form-control" placeholder="Username" required autofocus asp-for="@Model.Farmer.Username">
+                    <label for="txtPasswordF" class="sr-only">Password</label>
+                    <input type="password" id="txtPasswordF" class="form-control" placeholder="Password" required asp-for="@Model.Farmer.Password">
+                    <button class="btn btn-lg btn-primary btn-block" type="submit" asp-page-handler="SignInFarmer">Sign in</button>
+                </form>
+            </div>
+            <div class="tab-pane fade" id="retailer" role="tabpanel" aria-labelledby="retailer-tab">
+                <form method="post">
+                    <label for="txtUserNameR" class="sr-only">Username</label>
+                    <input type="text" id="txtUserNameR" class="form-control" placeholder="Username" required autofocus asp-for="@Model.Retailer.Username">
+                    <label for="txtPasswordR" class="sr-only">Password</label>
+                    <input type="password" id="txtPasswordR" class="form-control" placeholder="Password" required asp-for="@Model.Retailer.Password">
+                    <button class="btn btn-lg btn-primary btn-block" type="submit" asp-page-handler="SignInRetailer">Sign in</button>
+                </form>
+            </div>
+        </div>
+
+        @*<div class="checkbox mb-3">
             <label>
                 <input type="checkbox" value="remember-me"> Remember me
             </label>
-        </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        </div>*@
+
+
         <p class="mt-5 mb-3 text-muted">&copy; 2017-2019</p>
-    </form>
+    </div>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
