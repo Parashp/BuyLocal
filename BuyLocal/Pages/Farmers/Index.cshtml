@@ -13,7 +13,7 @@
         $(document).ready(function () {
             $(window).on('load', function () {
               var username = '@Model.Username';
-                connection.invoke("SendMessage", username, "a").catch(err => console.error(err));
+                connectionActivityHub.invoke("SendMessage", username, "a").catch(err => console.error(err));
             });
             
             

@@ -14,11 +14,5 @@ namespace BuyLocal.Hubs
         {
             await Clients.All.SendAsync("ReceiveMessage", username, message);
         }
-
-        public async Task SendMessage2(string username, string message)
-        {
-            await Clients.All.SendAsync("ReceiveMessage", username, message);
-        }
-
     }
 }

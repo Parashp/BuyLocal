@@ -15,7 +15,7 @@
             $(window).on('load', function () {
                 var username = '@Model.Username';
                 var message = "";
-                connectionActivityHubProxy.invoke("sendMessage2", username, message).catch(err => console.error(err));
+                connectionActivityHub.invoke("sendMessage", username, message).catch(err => console.error(err));
             });
 
 

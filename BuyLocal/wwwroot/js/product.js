@@ -1,8 +1,14 @@
 ﻿"use strict";
 
-var connection = new signalR.HubConnectionBuilder().withUrl("/producthub").build();;
+var connectionProductHub = new signalR.HubConnectionBuilder().withUrl("/producthub").build();
 
-connection.start().then(function () {
+connectionProductHub.on("showmessagetoproductpage", function (message) {
+    //show notification
+    $.notify(message, { className: 'info', globalPosition: 'right bottom' });
+});
+
+
+connectionProductHub.start().then(function () {
     console.log("connected");
 }).catch(function (err) {
     return console.error(err.toString());

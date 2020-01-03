@@ -12,12 +12,17 @@ namespace BuyLocal
     {
         public string Username { get; set; }
         public Guid ProductID { get; set; }
+
+        public string ProductName { get; set; }
+
         public void OnGet(Guid id)
         {
             ProductID = id;
             Username = HttpContext.Session.GetString("username");
             if (string.IsNullOrEmpty(Username))
                 Username = "Guest";
+
+            ProductName = "Item One";
         }
     }
 }

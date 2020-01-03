@@ -1,10 +1,10 @@
 ﻿"use strict";
 
-var connection = new signalR.HubConnectionBuilder().withUrl("/activityhub").build();
+var connectionActivityHub = new signalR.HubConnectionBuilder().withUrl("/activityhub").build();
 
 
 
-connection.start().then(function () {
+connectionActivityHub.start().then(function () {
     console.log("connected");
 }).catch(function (err) {
     return console.error(err.toString());

@@ -28,7 +28,7 @@
                 <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
                 <div class="card-body">
                     <h4 class="card-title">
-                        <a href="#">Item One</a>
+                        <a href="#">@Model.ProductName</a>
                     </h4>
                     <h5>$24.99</h5>
                     <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
@@ -52,21 +52,18 @@
     <script src="~/js/product.js"></script>
     <script>
         $(document).ready(function () {
-            connection.on("ReceiveMessage", function (message) {
-                //show notification
-                $.notify(message, { className: 'info', globalPosition: 'right bottom' });
-            });
 
-            //send notification
-            $(window).on('load', function () {
+            setTimeout(function () {
+                //send notification
+                var productName = '@Model.ProductName';
+                var message = 'someone person is watching \''+productName+'\' now.';                
+                connectionProductHub.invoke("SendMessageNewProductViewer", message).catch(err => console.error(err));
 
-                var groupName = '@Model.ProductID';
-                //connection.invoke("AddToGroup", groupName).catch(err => console.error(err));
+            }, 1000); // How long do you want the delay to be (in milliseconds)? 
 
-                var message = '1 person is watching this product.';
-                
-                connection.invoke("SendMessage", groupName, message).catch(err => console.error(err));
-            });
+            
         });
+
+         
     </script>
 }
