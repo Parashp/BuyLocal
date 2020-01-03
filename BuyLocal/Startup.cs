@@ -54,7 +54,8 @@ namespace BuyLocal
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
-                endpoints.MapHub<ChatHub>("/chatHub");
+                endpoints.MapHub<ChatHub>("/activityhub");
+                endpoints.MapHub<ChatHub>("/producthub");
             });
         }
     }

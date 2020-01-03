@@ -5,3 +5,18 @@
 }
 
 <h1>Welcome @Model.Username</h1>
+
+@section Scripts {
+
+    <script src="~/js/activity.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(window).on('load', function () {
+              var username = '@Model.Username';
+                connection.invoke("SendMessage", username, "a").catch(err => console.error(err));
+            });
+            
+            
+        });
+    </script>
+}
