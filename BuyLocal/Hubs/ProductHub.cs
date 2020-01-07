@@ -4,12 +4,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ViewModel;
 using ViewModel.Enum;
 
 namespace BuyLocal.Hubs
 {
     public class ProductHub : Hub<IProductClient>
-    {        
+    {
         private static IMemoryCache _cacheProductViewerCount;
         public ProductHub(IMemoryCache cache)
         {
@@ -17,7 +18,7 @@ namespace BuyLocal.Hubs
         }
         // Overridable hub methods  
         public override async Task OnConnectedAsync()
-        {   
+        {
             var productId = Context.GetHttpContext().Request.Query["ProductID"];
                         
             var cacheEntry= await _cacheProductViewerCount.GetOrCreateAsync<int>(productId, entry =>
@@ -26,6 +27,7 @@ namespace BuyLocal.Hubs
             });
             _cacheProductViewerCount.Set<int>(productId, ++cacheEntry);
 
+            //Add connection to ProductID group, when new connection is made, it will notify other viewers
             await Groups.AddToGroupAsync(Context.ConnectionId, productId);
 
             //Notify Other viewers 
@@ -41,6 +43,7 @@ namespace BuyLocal.Hubs
             var productId = Context.GetHttpContext().Request.Query["ProductID"];
 
             await Groups.RemoveFromGroupAsync(Context.ConnectionId, productId);
+                        
             var cacheEntry = await _cacheProductViewerCount.GetOrCreateAsync<int>(productId, entry =>
             {
                 return Task.FromResult<int>(1);

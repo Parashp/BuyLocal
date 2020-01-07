@@ -57,6 +57,7 @@ namespace BuyLocal
                 endpoints.MapRazorPages();
                 endpoints.MapHub<ActivityHub>("/activityhub");
                 endpoints.MapHub<ProductHub>("/producthub");
+                endpoints.MapHub<FarmerHub>("/farmerhub");
             });
         }
     }

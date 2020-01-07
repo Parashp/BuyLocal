@@ -32,6 +32,7 @@
                     </h4>
                     <h5>$@Model.Item.Price</h5>
                     <p class="card-text">@Model.Item.Desc</p>
+                    <p><i id="farmer" class="fa fa-user"></i> Produce By: @Model.Item.ProduceBy.DisplayName</p>
                 </div>
                 <div class="card-footer">
                     <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
@@ -49,12 +50,13 @@
 <!-- /.row -->
 @section Scripts {
     <script>
-                var productId = '@Model.Item.ID';
-
+        var farmerId = '@Model.Item.ProduceBy.ID';
+        var productId = '@Model.Item.ID';
     </script>
     <script src="~/js/product.js"></script>
+    <script src="~/js/farmer.js"></script>
     <script>
-        connectionProductHub.on("NotifyProductViewerCount", function (count) {            
+        connectionProductHub.on("NotifyProductViewerCount", function (count) {
             //show notification
             var msg = count + " people are watching now";
             $('#viewersCount').notify(msg, { className: 'info' });
@@ -65,14 +67,24 @@
             $('#viewersCount').text(count);
         });
     </script>
-    @*<script>
+    <script>
+        connectionFarmerHub.on("NotifyFarmerIsOnline", function (farmerID, farmerName) {
+            //show notification
+            var msg =  farmerName + " is online now";
+            $('#farmer').notify(msg, { className: 'info' });
+        });
+
+        connectionFarmerHub.on("DisplayFarmerIsOnline", function (farmerID, farmerName) {
+            $('#farmer').css("color", "green");
+        });
+    </script>
+    <script>
             $(document).ready(function () {
 
                 setTimeout(function () {
-                    //send notification
-                    var productName = '@Model.Item.Name';
-                    var message = 'someone person is watching \''+productName+'\' now.';
-                    connectionProductHub.invoke("SendMessageNewProductViewer", message).catch(err => console.error(err));
+                    //add farmerId to notify when online
+                    connectionFarmerHub.invoke("AddFarmerToGroup", farmerId).catch(err => console.error(err));
+                    connectionFarmerHub.invoke("GetFarmerOnlineStatus", farmerId).catch(err => console.error(err));
 
                 }, 1000); // How long do you want the delay to be (in milliseconds)?
 
@@ -80,5 +92,5 @@
             });
 
 
-        </script>*@
+        </script>
 }

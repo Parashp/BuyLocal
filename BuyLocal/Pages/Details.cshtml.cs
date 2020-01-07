@@ -19,8 +19,7 @@ namespace BuyLocal
         public ProductViewModel  Item { get; set; }
 
         public void OnGet(Guid ProductID)
-        {
-            ProductID = ProductID;
+        {            
             Username = HttpContext.Session.GetString("username");
             if (string.IsNullOrEmpty(Username))
                 Username = "Guest";

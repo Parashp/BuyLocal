@@ -5,18 +5,26 @@
 }
 
 <h1>Welcome @Model.Username</h1>
+<p>Farmer's Name: @Model.Farmer.DisplayName</p>
 
 @section Scripts {
-
-    <script src="~/js/activity.js"></script>
     <script>
-        $(document).ready(function () {
-            $(window).on('load', function () {
-              var username = '@Model.Username';
-                connectionActivityHub.invoke("SendMessage", username, "a").catch(err => console.error(err));
-            });
-            
-            
-        });
+
+        var farmerId = '@Model.Farmer.ID';
     </script>
+    <script src="~/js/farmer.js"></script>
+    <script>
+            $(document).ready(function () {
+
+                setTimeout(function () {
+                    //notify farmer is online                   
+                    connectionFarmerHub.invoke("SendFarmerIsOnline", farmerId).catch(err => console.error(err));
+
+                }, 1000); // How long do you want the delay to be (in milliseconds)?
+
+
+            });
+
+
+        </script>
 }

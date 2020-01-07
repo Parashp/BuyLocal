@@ -49,5 +49,17 @@ namespace ViewModel
             GetFarmers();
             return _farmers[i];
         }
+
+        public static FarmerViewModel GetFarmer(Guid ID)
+        {
+            GetFarmers();
+            return _farmers.Find(x=> x.ID==ID);
+        }
+
+        public static FarmerViewModel GetFarmer(string userName)
+        {
+            GetFarmers();
+            return _farmers.Find(x => x.UserName == userName);
+        }
     }
 }
