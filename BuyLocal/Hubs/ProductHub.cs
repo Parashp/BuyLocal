@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.SignalR;
+using Microsoft.Extensions.Caching.Memory;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,20 +9,30 @@ using ViewModel.Enum;
 namespace BuyLocal.Hubs
 {
     public class ProductHub : Hub<IProductClient>
-    {
-        // Use this variable to track user count
-        private static int _userCount = 0;
-
+    {        
+        private static IMemoryCache _cacheProductViewerCount;
+        public ProductHub(IMemoryCache cache)
+        {
+            _cacheProductViewerCount = cache;
+        }
         // Overridable hub methods  
         public override async Task OnConnectedAsync()
-        {
-            await Task.Run(() => _userCount++);
-            var msg = $"{_userCount} persons are watching this page now.";
-                        
+        {   
             var productId = Context.GetHttpContext().Request.Query["ProductID"];
+                        
+            var cacheEntry= await _cacheProductViewerCount.GetOrCreateAsync<int>(productId, entry =>
+            {
+                return Task.FromResult<int>(0);
+            });
+            _cacheProductViewerCount.Set<int>(productId, ++cacheEntry);
+
             await Groups.AddToGroupAsync(Context.ConnectionId, productId);
 
-            await Clients.Others.ShowMessageToProductPage(msg);
+            //Notify Other viewers 
+            await Clients.OthersInGroup(productId).NotifyProductViewerCount(cacheEntry);
+
+            //Show current viewers count on Product page
+            await Clients.Group(productId).DisplayProductViewerCount(cacheEntry);
 
         }
 
@@ -30,16 +41,17 @@ namespace BuyLocal.Hubs
             var productId = Context.GetHttpContext().Request.Query["ProductID"];
 
             await Groups.RemoveFromGroupAsync(Context.ConnectionId, productId);
-
-            await Task.Run(() => _userCount--);
+            var cacheEntry = await _cacheProductViewerCount.GetOrCreateAsync<int>(productId, entry =>
+            {
+                return Task.FromResult<int>(1);
+            });
+            _cacheProductViewerCount.Set<int>(productId, --cacheEntry);
+                        
         }
-        public async Task SendMessageNewProductViewer(string ProductId)
-        {
-            var msg = $"other persons are watching this page now.";
-            
-            await Groups.AddToGroupAsync(Context.ConnectionId, ProductId);            
 
-            await Clients.OthersInGroup(ProductId).ShowMessageToProductPage(msg);            
+        public async Task DisplayProductViewerCount(string ProductId)
+        {
+            await Clients.OthersInGroup(ProductId).DisplayProductViewerCount(1);            
         }
     }
 }

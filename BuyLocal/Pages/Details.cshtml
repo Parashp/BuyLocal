@@ -35,7 +35,7 @@
                 </div>
                 <div class="card-footer">
                     <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                    <div class="float-right"><i class="fa fa-eye"></i> <label id="viewersCount">9</label></div>
+                    <div class="float-right"><i class="fa fa-eye"></i> <label id="viewersCount">1</label></div>
                 </div>
             </div>
 
@@ -48,25 +48,37 @@
 </div>
 <!-- /.row -->
 @section Scripts {
-        <script>
+    <script>
                 var productId = '@Model.Item.ID';
 
-        </script>
+    </script>
     <script src="~/js/product.js"></script>
-    @*<script>
-        $(document).ready(function () {
-
-            setTimeout(function () {
-                //send notification
-                var productName = '@Model.Item.Name';
-                var message = 'someone person is watching \''+productName+'\' now.';                
-                connectionProductHub.invoke("SendMessageNewProductViewer", message).catch(err => console.error(err));
-
-            }, 1000); // How long do you want the delay to be (in milliseconds)? 
-
-            
+    <script>
+        connectionProductHub.on("NotifyProductViewerCount", function (count) {            
+            //show notification
+            var msg = count + " people are watching now";
+            $('#viewersCount').notify(msg, { className: 'info', globalPosition: 'right bottom' });
         });
 
-         
-    </script>*@
+        connectionProductHub.on("DisplayProductViewerCount", function (count) {
+            //update viewer count
+            $('#viewersCount').text(count);
+        });
+    </script>
+    @*<script>
+            $(document).ready(function () {
+
+                setTimeout(function () {
+                    //send notification
+                    var productName = '@Model.Item.Name';
+                    var message = 'someone person is watching \''+productName+'\' now.';
+                    connectionProductHub.invoke("SendMessageNewProductViewer", message).catch(err => console.error(err));
+
+                }, 1000); // How long do you want the delay to be (in milliseconds)?
+
+
+            });
+
+
+        </script>*@
 }

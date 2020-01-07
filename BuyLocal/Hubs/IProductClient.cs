@@ -7,6 +7,7 @@ namespace BuyLocal.Hubs
 {
     public interface IProductClient
     {		
-		Task ShowMessageToProductPage(string message);
+		Task NotifyProductViewerCount(int count);
+        Task DisplayProductViewerCount(int count);
     }
 }

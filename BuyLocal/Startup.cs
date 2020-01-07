@@ -27,6 +27,7 @@ namespace BuyLocal
             services.AddSession();
             services.AddRazorPages();
             services.AddSignalR();
+            services.AddMemoryCache();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,7 +51,7 @@ namespace BuyLocal
 
             app.UseAuthorization();
             app.UseSession();
-
+            
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
