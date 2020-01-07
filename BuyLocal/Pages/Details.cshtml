@@ -57,7 +57,7 @@
         connectionProductHub.on("NotifyProductViewerCount", function (count) {            
             //show notification
             var msg = count + " people are watching now";
-            $('#viewersCount').notify(msg, { className: 'info', globalPosition: 'right bottom' });
+            $('#viewersCount').notify(msg, { className: 'info' });
         });
 
         connectionProductHub.on("DisplayProductViewerCount", function (count) {

@@ -31,7 +31,7 @@ namespace BuyLocal.Hubs
             //Notify Other viewers 
             await Clients.OthersInGroup(productId).NotifyProductViewerCount(cacheEntry);
 
-            //Show current viewers count on Product page
+            //Update current viewers count on Product page
             await Clients.Group(productId).DisplayProductViewerCount(cacheEntry);
 
         }
@@ -46,7 +46,9 @@ namespace BuyLocal.Hubs
                 return Task.FromResult<int>(1);
             });
             _cacheProductViewerCount.Set<int>(productId, --cacheEntry);
-                        
+
+            //Update current viewers count on Product page
+            await Clients.Group(productId).DisplayProductViewerCount(cacheEntry);
         }
 
         public async Task DisplayProductViewerCount(string ProductId)
