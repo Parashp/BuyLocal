@@ -21,37 +21,163 @@ namespace ViewModel
         public FarmerViewModel ProduceBy { get; set; }
         public RetailerViewModel SaleBy { get; set; }
 
+
+        private static List<ProductViewModel> _products;
         public static List<ProductViewModel> GetProducts()
         {
-            List<ProductViewModel> products = new List<ProductViewModel>();
+            _products = new List<ProductViewModel>();
             Random randomPrice = new Random(1);
 
-            for (int i = 1; i < 15; i++)
+            _products.Add(new ProductViewModel
             {
-                var product = new ProductViewModel
+                ID = Guid.Parse("386375d2-9d37-40c4-9b12-f0b3b00b652a"),
+                Name = "Item One",
+                Desc = "This product was design and developed by Farmer who lives in our neighbourhood.",
+                Price = Math.Round(randomPrice.Next(2, 10) + randomPrice.NextDouble(), 2),
+                ProduceBy = FarmerViewModel.GetFarmer(1),
+                SaleBy = new RetailerViewModel()
                 {
                     ID = Guid.NewGuid(),
-                    Name = "Item " + i.ToString(),
-                    Desc = "This product was design and developed by Farmer who lives in our neighbourhood.",
-                    Price = Math.Round(randomPrice.Next(2, 10) + randomPrice.NextDouble(),2),
-                    ProduceBy = new FarmerViewModel()
-                    {
-                        ID = Guid.NewGuid(),
-                        UserName = "farmerOne",
-                        DisplayName = "Good Farmer",
-                        Address = "Local"
-                    },
-                    SaleBy = new RetailerViewModel()
-                    {
-                        ID = Guid.NewGuid(),
-                        DisplayName = "Wholesale",
-                        UserName = "wholesale"
-                    }
-                };
+                    DisplayName = "Wholesale",
+                    UserName = "wholesale"
+                }
+            });
+            _products.Add(new ProductViewModel
+            {
+                ID = Guid.Parse("d108b5d5-bf8c-4c7c-afb2-bdb993ae9518"),
+                Name = "Item Two",
+                Desc = "This product was design and developed by Farmer who lives in our neighbourhood.",
+                Price = Math.Round(randomPrice.Next(2, 10) + randomPrice.NextDouble(), 2),
+                ProduceBy = FarmerViewModel.GetFarmer(1),
+                SaleBy = new RetailerViewModel()
+                {
+                    ID = Guid.NewGuid(),
+                    DisplayName = "Wholesale",
+                    UserName = "wholesale"
+                }
+            });
+            _products.Add(new ProductViewModel
+            {
+                ID = Guid.Parse("fcb2a97f-9db1-48b8-aa4a-258ecef1fda0"),
+                Name = "Item Three",
+                Desc = "This product was design and developed by Farmer who lives in our neighbourhood.",
+                Price = Math.Round(randomPrice.Next(2, 10) + randomPrice.NextDouble(), 2),
+                ProduceBy = FarmerViewModel.GetFarmer(1),
+                SaleBy = new RetailerViewModel()
+                {
+                    ID = Guid.NewGuid(),
+                    DisplayName = "Wholesale",
+                    UserName = "wholesale"
+                }
+            });
+            _products.Add(new ProductViewModel
+            {
+                ID = Guid.Parse("f17e3d3f-c156-4798-8537-1f2cbddbb7e5"),
+                Name = "Item Four",
+                Desc = "This product was design and developed by Farmer who lives in our neighbourhood.",
+                Price = Math.Round(randomPrice.Next(2, 10) + randomPrice.NextDouble(), 2),
+                ProduceBy = FarmerViewModel.GetFarmer(1),
+                SaleBy = new RetailerViewModel()
+                {
+                    ID = Guid.NewGuid(),
+                    DisplayName = "Wholesale",
+                    UserName = "wholesale"
+                }
+            });
+            _products.Add(new ProductViewModel
+            {
+                ID = Guid.Parse("d959e514-5614-4b59-9036-351371b13520"),
+                Name = "Item Five",
+                Desc = "This product was design and developed by Farmer who lives in our neighbourhood.",
+                Price = Math.Round(randomPrice.Next(2, 10) + randomPrice.NextDouble(), 2),
+                ProduceBy = FarmerViewModel.GetFarmer(1),
+                SaleBy = new RetailerViewModel()
+                {
+                    ID = Guid.NewGuid(),
+                    DisplayName = "Wholesale",
+                    UserName = "wholesale"
+                }
+            });
+            //Farmer 2
+            _products.Add(new ProductViewModel
+            {
+                ID = Guid.Parse("386375d2-9d37-40c4-9b12-f0b3b00b652a"),
+                Name = "Item One",
+                Desc = "This product was design and developed by Farmer who lives in our neighbourhood.",
+                Price = Math.Round(randomPrice.Next(2, 10) + randomPrice.NextDouble(), 2),
+                ProduceBy = FarmerViewModel.GetFarmer(2),
+                SaleBy = new RetailerViewModel()
+                {
+                    ID = Guid.NewGuid(),
+                    DisplayName = "Wholesale",
+                    UserName = "wholesale"
+                }
+            });
+            _products.Add(new ProductViewModel
+            {
+                ID = Guid.Parse("d108b5d5-bf8c-4c7c-afb2-bdb993ae9518"),
+                Name = "Item Two",
+                Desc = "This product was design and developed by Farmer who lives in our neighbourhood.",
+                Price = Math.Round(randomPrice.Next(2, 10) + randomPrice.NextDouble(), 2),
+                ProduceBy = FarmerViewModel.GetFarmer(2),
+                SaleBy = new RetailerViewModel()
+                {
+                    ID = Guid.NewGuid(),
+                    DisplayName = "Wholesale",
+                    UserName = "wholesale"
+                }
+            });
+            _products.Add(new ProductViewModel
+            {
+                ID = Guid.Parse("fcb2a97f-9db1-48b8-aa4a-258ecef1fda0"),
+                Name = "Item Three",
+                Desc = "This product was design and developed by Farmer who lives in our neighbourhood.",
+                Price = Math.Round(randomPrice.Next(2, 10) + randomPrice.NextDouble(), 2),
+                ProduceBy = FarmerViewModel.GetFarmer(2),
+                SaleBy = new RetailerViewModel()
+                {
+                    ID = Guid.NewGuid(),
+                    DisplayName = "Wholesale",
+                    UserName = "wholesale"
+                }
+            });
+            _products.Add(new ProductViewModel
+            {
+                ID = Guid.Parse("f17e3d3f-c156-4798-8537-1f2cbddbb7e5"),
+                Name = "Item Four",
+                Desc = "This product was design and developed by Farmer who lives in our neighbourhood.",
+                Price = Math.Round(randomPrice.Next(2, 10) + randomPrice.NextDouble(), 2),
+                ProduceBy = FarmerViewModel.GetFarmer(2),
+                SaleBy = new RetailerViewModel()
+                {
+                    ID = Guid.NewGuid(),
+                    DisplayName = "Wholesale",
+                    UserName = "wholesale"
+                }
+            });
+            _products.Add(new ProductViewModel
+            {
+                ID = Guid.Parse("d959e514-5614-4b59-9036-351371b13520"),
+                Name = "Item Five",
+                Desc = "This product was design and developed by Farmer who lives in our neighbourhood.",
+                Price = Math.Round(randomPrice.Next(2, 10) + randomPrice.NextDouble(), 2),
+                ProduceBy = FarmerViewModel.GetFarmer(2),
+                SaleBy = new RetailerViewModel()
+                {
+                    ID = Guid.NewGuid(),
+                    DisplayName = "Wholesale",
+                    UserName = "wholesale"
+                }
+            });
 
-                products.Add(product);
-            }
-            return products;
+            return _products;
+        }
+
+        public static ProductViewModel GetProduct(Guid ProductID)
+        {
+            GetProducts();
+
+            return _products.Find(x => x.ID == ProductID);
         }
     }
 }

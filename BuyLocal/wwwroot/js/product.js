@@ -1,6 +1,7 @@
 ﻿"use strict";
 
-var connectionProductHub = new signalR.HubConnectionBuilder().withUrl("/producthub").build();
+var connectionProductHub = new signalR.HubConnectionBuilder().withUrl("/producthub?ProductID=" + productId).build();
+
 
 connectionProductHub.on("showmessagetoproductpage", function (message) {
     //show notification

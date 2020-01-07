@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 namespace BuyLocal.Hubs
 {
     public interface IProductClient
-    {
-        Task ShowMessageToProductPage(string username);
+    {		
+		Task ShowMessageToProductPage(string message);
     }
 }

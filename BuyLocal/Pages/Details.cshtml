@@ -28,10 +28,10 @@
                 <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
                 <div class="card-body">
                     <h4 class="card-title">
-                        <a href="#">@Model.ProductName</a>
+                        <a href="#">@Model.Item.Name</a>
                     </h4>
-                    <h5>$24.99</h5>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
+                    <h5>$@Model.Item.Price</h5>
+                    <p class="card-text">@Model.Item.Desc</p>
                 </div>
                 <div class="card-footer">
                     <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
@@ -48,14 +48,17 @@
 </div>
 <!-- /.row -->
 @section Scripts {
-        
+        <script>
+                var productId = '@Model.Item.ID';
+
+        </script>
     <script src="~/js/product.js"></script>
-    <script>
+    @*<script>
         $(document).ready(function () {
 
             setTimeout(function () {
                 //send notification
-                var productName = '@Model.ProductName';
+                var productName = '@Model.Item.Name';
                 var message = 'someone person is watching \''+productName+'\' now.';                
                 connectionProductHub.invoke("SendMessageNewProductViewer", message).catch(err => console.error(err));
 
@@ -65,5 +68,5 @@
         });
 
          
-    </script>
+    </script>*@
 }

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using ViewModel;
 
 namespace BuyLocal
 {
@@ -15,14 +16,16 @@ namespace BuyLocal
 
         public string ProductName { get; set; }
 
-        public void OnGet(Guid id)
+        public ProductViewModel  Item { get; set; }
+
+        public void OnGet(Guid ProductID)
         {
-            ProductID = id;
+            ProductID = ProductID;
             Username = HttpContext.Session.GetString("username");
             if (string.IsNullOrEmpty(Username))
                 Username = "Guest";
 
-            ProductName = "Item One";
+            Item = ProductViewModel.GetProduct(ProductID);
         }
     }
 }
