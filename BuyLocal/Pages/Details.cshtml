@@ -58,7 +58,7 @@
     <script>
         connectionProductHub.on("NotifyProductViewerCount", function (count) {
             //show notification
-            var msg = count + " people are watching now";
+            var msg = count + " people are watching this now";
             $('#viewersCount').notify(msg, { className: 'info' });
         });
 
