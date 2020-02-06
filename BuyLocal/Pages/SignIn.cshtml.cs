@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BusinessLayer;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -12,6 +13,7 @@ namespace BuyLocal
 {
     public class SignInModel : PageModel
     {
+        UserService _userService;
         [BindProperty]
         public LoginViewModel Consumer { get; set; }
 
@@ -24,16 +26,20 @@ namespace BuyLocal
 
         public string Msg { get; set; }
 
+        public SignInModel(UserService userService)
+        {
+            _userService = userService;
+        }
         public void OnGet()
         {
             Consumer = Farmer = Retailer = new LoginViewModel();
 
         }
 
-        public void OnPostSignInConsumer()
+        public async Task OnPostSignInConsumer()
         {
-            var chk = true; //Username.Equals("abc") && Password.Equals("123");
-            if (chk)
+            var user = await _userService.GetUserAsync(Consumer.Username);
+            if (user != null)
             {
                 HttpContext.Session.SetString("username", Consumer.Username);
                 HttpContext.Session.SetInt32("userrole", (int)UserRole.Consumer);
@@ -46,10 +52,10 @@ namespace BuyLocal
 
         }
 
-        public void OnPostSignInFarmer()
+        public async Task OnPostSignInFarmer()
         {
-            var chk = true; //Username.Equals("abc") && Password.Equals("123");
-            if (chk)
+            var user = await _userService.GetUserAsync(Farmer.Username);
+            if (user != null)
             {
                 HttpContext.Session.SetString("username", Farmer.Username);
                 HttpContext.Session.SetInt32("userrole", (int)UserRole.Farmer);
@@ -62,10 +68,10 @@ namespace BuyLocal
 
         }
 
-        public void OnPostSignInRetailer()
+        public async Task OnPostSignInRetailer()
         {
-            var chk = true; //Username.Equals("abc") && Password.Equals("123");
-            if (chk)
+            var user = await _userService.GetUserAsync(Farmer.Username);
+            if (user != null)
             {
                 HttpContext.Session.SetString("username", Retailer.Username);
                 HttpContext.Session.SetInt32("userrole", (int)UserRole.Retailer);

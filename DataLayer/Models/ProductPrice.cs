@@ -6,14 +6,13 @@ using System.Text;
 
 namespace DataLayer.Models
 {
-    public class Contact
+    public class ProductPrice
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid ContactID { get; set; }
-        public string Phone1 { get; set; }
-        public string Phone2 { get; set; }
-        public string Email { get; set; }
-        public string Fax { get; set; }
+        public Guid ProductPriceID { get; set; }        
+        public decimal Price { get; set; }
+        public DateTime DateCreated { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }

@@ -4,14 +4,16 @@ using DataLayer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataLayer.Migrations
 {
     [DbContext(typeof(BuyLocalContext))]
-    partial class BuyLocalContextModelSnapshot : ModelSnapshot
+    [Migration("20200205234955_ProductTableAdded")]
+    partial class ProductTableAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -40,7 +42,7 @@ namespace DataLayer.Migrations
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("DateUpdated")
+                    b.Property<DateTime>("DateUpdated")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Geo_Lat")
@@ -101,7 +103,7 @@ namespace DataLayer.Migrations
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("DateUpdated")
+                    b.Property<DateTime>("DateUpdated")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("FirstName")
@@ -123,71 +125,6 @@ namespace DataLayer.Migrations
                     b.HasIndex("ContactID");
 
                     b.ToTable("Persons");
-                });
-
-            modelBuilder.Entity("DataLayer.Models.Product", b =>
-                {
-                    b.Property<Guid>("ProductID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("DateCreated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DateUpdated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsAvailable")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("PhotoID")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("Quantity")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid?>("UserID")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("ProductID");
-
-                    b.HasIndex("UserID");
-
-                    b.ToTable("Products");
-                });
-
-            modelBuilder.Entity("DataLayer.Models.ProductPrice", b =>
-                {
-                    b.Property<Guid>("ProductPriceID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("DateCreated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<Guid?>("ProductID")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("ProductPriceID");
-
-                    b.HasIndex("ProductID");
-
-                    b.ToTable("ProductPrices");
                 });
 
             modelBuilder.Entity("DataLayer.Models.Role", b =>
@@ -249,7 +186,7 @@ namespace DataLayer.Migrations
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("DateUpdated")
+                    b.Property<DateTime>("DateUpdated")
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("IsActive")
@@ -302,20 +239,6 @@ namespace DataLayer.Migrations
                         .HasForeignKey("ContactID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("DataLayer.Models.Product", b =>
-                {
-                    b.HasOne("DataLayer.Models.User", null)
-                        .WithMany("Products")
-                        .HasForeignKey("UserID");
-                });
-
-            modelBuilder.Entity("DataLayer.Models.ProductPrice", b =>
-                {
-                    b.HasOne("DataLayer.Models.Product", null)
-                        .WithMany("Prices")
-                        .HasForeignKey("ProductID");
                 });
 
             modelBuilder.Entity("DataLayer.Models.User", b =>

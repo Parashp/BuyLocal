@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace DataLayer.Models
@@ -8,6 +9,7 @@ namespace DataLayer.Models
     public class Address
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid AddressID { get; set; }
         public string AddressLine1 { get; set; }
         public string AddressLine2 { get; set; }
@@ -20,6 +22,6 @@ namespace DataLayer.Models
         public string Geo_Lon { get; set; }
 
         public DateTime DateCreated { get; set; }
-        public DateTime DateUpdated { get; set; }
+        public DateTime? DateUpdated { get; set; }
     }
 }

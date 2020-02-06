@@ -10,7 +10,7 @@ namespace DataLayer
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=tcp:buylocal.database.windows.net,1433;Initial Catalog=buylocal_dev;Persist Security Info=False;User ID=dbadmin;Password=buylocal@123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
+            optionsBuilder.UseSqlServer("Data Source=SQL5045.site4now.net;Initial Catalog=DB_9E3EC8_buylocal;User Id=DB_9E3EC8_buylocal_admin;Password=buylocal@123;");
         }
 
         public DbSet<Person> Persons { get; set; }
@@ -18,6 +18,9 @@ namespace DataLayer
 
         public DbSet<Role> Roles { get; set; }
         public DbSet<UserRole> UserRoles { get; set; }
+
+        public DbSet<Product> Products { get; set; }
+        public DbSet<ProductPrice> ProductPrices { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

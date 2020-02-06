@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BusinessLayer;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -24,11 +25,15 @@ namespace BuyLocal.Pages.Farmers
         public string DisplayName { get; set; }
 
         public FarmerViewModel Farmer { get; set; }
-        public void OnGet()
+        UserService _userService;
+        public IndexModel(UserService userService)
         {
-            
+            _userService = userService;
+        }
+        public async void OnGet()
+        {            
             Username = HttpContext.Session.GetString("username");
-            Farmer = FarmerViewModel.GetFarmer(Username);
+            Farmer = await _userService.GetFarmerAsync(Username);
             if (string.IsNullOrEmpty(Username))
             {
                 Username = "Guest";
